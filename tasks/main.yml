@@ -39,14 +39,16 @@
 
 - name: make sure (specified) locales are present
   locale_gen:
-    name: "{{ locales_present }}"
+    name: "{{ item }}"
     state: present
+  with_items: "{{ locales_present }}"
   tags: [configuration, locales, locales-present]
 
 - name: make sure (specified) locales are absent
   locale_gen:
-    name: "{{ locales_absent }}"
+    name: "{{ item }}"
     state: absent
+  with_items: "{{ locales_absent }}"
   tags: [configuration, locales, locales-absent]
 
 - name: set default locale
